@@ -113,8 +113,7 @@ def misclassification():
 
     fig = plt.figure(figsize=(25, 4))
 
-    for idx in np.arange(20):
-      ax = fig.add_subplot(2, 10, idx+1, xticks=[], yticks=[])
-      if(preds[idx]==labels[idx]):
-           plt.imshow(im_convert(images[idx]))
-           ax.set_title("{} ({})".format(str(classes[preds[idx].item()]), str(classes[labels[idx].item()])), color=("green" if preds[idx]==labels[idx]))
+    for idx in np.arange(60):
+      ax = fig.add_subplot(6, 10, idx+1, xticks=[], yticks=[])
+      plt.imshow(im_convert(images[idx]))#gt ground truth
+      ax.set_title(" pred {} gt ({})".format(str(classes[preds[idx].item()]), str(classes[labels[idx].item()])), color=("green" if preds[idx]==labels[idx] else "red"))
