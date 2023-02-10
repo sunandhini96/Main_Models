@@ -77,8 +77,7 @@ def imshow(img):
     # npimg = img.numpy()
     plt.imshow(np.transpose(img, (1, 2, 0)))
 
-use_cuda = torch.cuda.is_available()
-device = torch.device("cuda" if use_cuda else "cpu")
+
 
 # get some random training images
 dataiter = iter(trainloader)
@@ -103,6 +102,8 @@ def im_convert(tensor):
   return image
 
 def misclassification():
+    use_cuda = torch.cuda.is_available()
+    device = torch.device("cuda" if use_cuda else "cpu")
     dataiter = iter(testloader)
     images, labels = next(dataiter)
     images = images.to(device)
