@@ -42,28 +42,33 @@ if cuda:
 # Train Phase transformations
 #                                        transforms.RandomCrop(32,padding=4),
 #                                        A.Cutout(num_holes=1,max_h_size=16,max_w_size=16),                                         
-train_transforms = transforms.Compose([ transforms.RandomCrop(32,padding=4), # randomly flip and rotate
-                               transforms.ToTensor(),
-                               transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))  ])
-
-# Test Phase transformations
-test_transforms = transforms.Compose([
-                                      #  transforms.Resize((28, 28)),
-                                      #  transforms.ColorJitter(brightness=0.10, contrast=0.1, saturation=0.10, hue=0.1),
-                                       transforms.ToTensor(),
-                                        transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))
+mean=(0.5, 0.5, 0.5)
+std=(0.5, 0.5, 0.5)
+def train_transform_function(mean,std):
+  train_transform = A.Compose([A.PadIfNeeded(min_height=32+4, min_width=32+4),
+                                A.RandomCrop(32,32,always_apply=False,p=1.0), # randomly flip and rotate
+                                 A.Cutout(num_holes=1,max_h_size=16,max_w_size=16,fill_value=tuple(mean)), 
+                                A.Normalize(mean, std),
+                                ToTensorV2(),
                                        ])
+  return lambda img:train_transform(image=np.array(img))["image"]
+def test_transform_function():
+  test_transform = A.Compose([ 
+                                A.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)),
+                                ToTensorV2(),
+                                       ])
+  return lambda img:test_transform(image=np.array(img))["image"]
 # dataloader arguments - something you'll fetch these from cmdprmt
 dataloader_args = dict(shuffle=True, batch_size=60, num_workers=num_workers, pin_memory=True) if cuda else dict(shuffle=True, batch_size=40)
 
 trainset = torchvision.datasets.CIFAR10(root='./data', train=True,
-                                        download=True, transform=train_transforms)
+                                        download=True, transform=train_transform_function(mean,std))
 
 
 # train dataloader
 trainloader = torch.utils.data.DataLoader(trainset, **dataloader_args)
 testset = torchvision.datasets.CIFAR10(root='./data', train=False,
-                                       download=True, transform=test_transforms)
+                                       download=True, transform=test_transform_function())
 # test dataloader
 testloader = torch.utils.data.DataLoader(testset, **dataloader_args)
 
