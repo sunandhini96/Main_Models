@@ -31,7 +31,7 @@ SEED = 4
 #checking the CUDA is available or ?
 cuda = torch.cuda.is_available()
 print("CUDA Available?", cuda)
-
+num_workers=0
 # For reproducibility
 torch.manual_seed(SEED)
 
@@ -59,7 +59,7 @@ test_transforms = transforms.Compose([
 trainset = torchvision.datasets.CIFAR10(root='./data', train=True,
                                         download=True, transform=train_transforms)
 # dataloader arguments - something you'll fetch these from cmdprmt
-dataloader_args = dict(shuffle=True, batch_size=20, num_workers=2, pin_memory=True) if cuda else dict(shuffle=True, batch_size=2)
+dataloader_args = dict(shuffle=True, batch_size=20, num_workers=num_workers, pin_memory=True) if cuda else dict(shuffle=True, batch_size=2)
 
 # train dataloader
 trainloader = torch.utils.data.DataLoader(trainset, **dataloader_args)
