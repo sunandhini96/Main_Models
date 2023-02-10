@@ -104,7 +104,7 @@ criterion = nn.CrossEntropyLoss()
 optimizer = optim.SGD(model.parameters(), lr=0.001, momentum=0.9)
 scheduler = StepLR(optimizer, step_size=6, gamma=0.1)
 
-EPOCHS = 15
+EPOCHS = 20
 
 train_losses = []
 test_losses = []
