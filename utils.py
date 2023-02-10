@@ -23,7 +23,8 @@ from torch.optim.lr_scheduler import StepLR
 import torch.optim as optim
 
 from Models import resnet
-
+import matplotlib.pyplot as plt
+import numpy as np
 from Models.resnet import *
 
 SEED = 4
@@ -68,6 +69,28 @@ testloader = torch.utils.data.DataLoader(testset, **dataloader_args)
 
 classes = ('plane', 'car', 'bird', 'cat',
            'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
+
+# to display the images
+# functions to show an image
+def imshow(img):
+    img = img / 2 + 0.5     # unnormalize
+    # npimg = img.numpy()
+    plt.imshow(np.transpose(img, (1, 2, 0)))
+
+
+# get some random training images
+dataiter = iter(trainloader)
+images, labels = next(dataiter)
+print(images.shape)
+images=images.numpy()
+# show images
+fig=plt.figure(figsize=(25,4))
+#display 50 images
+# Display 20 images
+for idx in np.arange(20):
+      ax = fig.add_subplot(2, 20/2, idx+1, xticks=[], yticks=[])
+      imshow(images[idx])
+      ax.set_title(classes[labels[idx]])
 
 # We need to convert the images to numpy arrays as tensors are not compatible with matplotlib.
 def im_convert(tensor):  
