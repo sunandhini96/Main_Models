@@ -128,7 +128,7 @@ def train(model, device, train_loader, optimizer, epoch):
     y_pred = model(data)
 
     # Calculate loss
-    loss = criterion(y_pred, target)
+    loss = criterion(y_pred, target).item()
     train_losses.append(loss)
 
     # Backpropagation
