@@ -66,7 +66,7 @@ if cuda:
 train_transforms = transforms.Compose([transforms.ToTensor(),
                                        transforms.RandomRotation((-7.0, 7.0), fill=(1,)),
                                        transforms.RandomCrop(32,padding=4),
-                                       A.Cutout(num_holes=1,max_h_size=16,max_w_size=16),
+#                                        A.Cutout(num_holes=1,max_h_size=16,max_w_size=16),
                                        transforms.Normalize((0.1307,), (0.3081,))
                                        # The mean and std have to be sequences (e.g., tuples), therefore you should add a comma after the values. 
                                        # Note the difference between (0.1307) and (0.1307,)
