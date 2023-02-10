@@ -22,10 +22,10 @@ from tqdm import tqdm
 from torch.optim.lr_scheduler import StepLR
 import torch.optim as optim
 
-from Models import resnet
+#from Models import resnet
 import matplotlib.pyplot as plt
 import numpy as np
-from Models.resnet import *
+#from Models.resnet import *
 
 SEED = 4
 
