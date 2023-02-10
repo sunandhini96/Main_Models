@@ -43,9 +43,7 @@ if cuda:
 #                                        A.Cutout(num_holes=1,max_h_size=16,max_w_size=16),                                         
 train_transforms = transforms.Compose([ transforms.RandomCrop(32,padding=4), # randomly flip and rotate
                                transforms.ToTensor(),
-                               transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))
-                                
-                               ])
+                               transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))  ])
 
 # Test Phase transformations
 test_transforms = transforms.Compose([
