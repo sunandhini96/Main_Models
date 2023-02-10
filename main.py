@@ -10,22 +10,22 @@ Original file is located at
 # Commented out IPython magic to ensure Python compatibility.
 # %matplotlib inline
 
-from google.colab import drive
-drive.mount('/content/drive')
+# from google.colab import drive
+# drive.mount('/content/drive')
 
 # Commented out IPython magic to ensure Python compatibility.
 # %cd /content/drive/MyDrive/Github/
 
-!git init School_of_AI
+# !git init School_of_AI
 
 # Commented out IPython magic to ensure Python compatibility.
 # %cd School_of_AI/
 
-!git status
+# !git status
 
-!git add .
+# !git add .
 
-!git clone https://github.com/sunandhini96/Main_Models.git
+# !git clone https://github.com/sunandhini96/Main_Models.git
 
 # Commented out IPython magic to ensure Python compatibility.
 # %cd Main_Models/
