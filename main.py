@@ -115,6 +115,7 @@ def train(model, device, train_loader, optimizer, epoch):
   pbar = tqdm(train_loader)
   correct = 0
   processed = 0
+  train_loss=0
   for batch_idx, (data, target) in enumerate(pbar):
     # get samples
     data, target = data.to(device), target.to(device)
@@ -128,21 +129,25 @@ def train(model, device, train_loader, optimizer, epoch):
     y_pred = model(data)
 
     # Calculate loss
-    loss = criterion(y_pred, target).item()
-    train_losses.append(loss)
+    loss = criterion(y_pred, target)
+    #train_losses.append(loss)
 
     # Backpropagation
     loss.backward()
     optimizer.step()
-
+    train_loss+=loss.item()
     # Update pbar-tqdm
     
     pred = y_pred.argmax(dim=1, keepdim=True)  # get the index of the max log-probability
     correct += pred.eq(target.view_as(pred)).sum().item()
-    processed += len(data)
-
-    pbar.set_description(desc= f'Loss={loss.item()} Batch_id={batch_idx} Accuracy={100*correct/processed:0.2f}')
-    train_acc.append(100*correct/processed)
+  processed += len(data)
+  train_loss/=len(train_loader.dataset)
+  train_losses.append(train_loss)
+  print('\nTrain set: Average loss: {:.4f}, Accuracy: {}/{} ({:.2f}%)\n'.format(
+    train_loss, correct, len(train_loader.dataset),
+    100. * correct / len(train_loader.dataset)))
+  pbar.set_description(desc= f'Loss={loss.item()} Batch_id={batch_idx} Accuracy={100*correct/processed:0.2f}')
+  train_acc.append(100*correct/len(train_loader.dataset))
 
 def test(model, device, test_loader):
     model.eval()
