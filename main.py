@@ -49,51 +49,50 @@ from Models import resnet
 
 from Models.resnet import *
 
-SEED = 4
+# SEED = 4
 
-#checking the CUDA is available or ?
-cuda = torch.cuda.is_available()
-print("CUDA Available?", cuda)
+# #checking the CUDA is available or ?
+# cuda = torch.cuda.is_available()
+# print("CUDA Available?", cuda)
 
-# For reproducibility
-torch.manual_seed(SEED)
+# # For reproducibility
+# torch.manual_seed(SEED)
 
-if cuda:
-    torch.cuda.manual_seed(SEED)
+# if cuda:
+#     torch.cuda.manual_seed(SEED)
 
-# Train Phase transformations
-#                                        transforms.RandomCrop(32,padding=4),
-#                                        A.Cutout(num_holes=1,max_h_size=16,max_w_size=16),                                         
-train_transforms = transforms.Compose([transforms.ToTensor(),
-                                       transforms.RandomRotation((-7.0, 7.0), fill=(1,)),
-                                       transforms.Normalize((0.1307,), (0.3081,))
-                                       # The mean and std have to be sequences (e.g., tuples), therefore you should add a comma after the values. 
-                                       # Note the difference between (0.1307) and (0.1307,)
-                                       ])
+# # Train Phase transformations
+# #                                        transforms.RandomCrop(32,padding=4),
+# #                                        A.Cutout(num_holes=1,max_h_size=16,max_w_size=16),                                         
+# train_transforms = transforms.Compose([ transforms.RandomCrop(32,padding=4), # randomly flip and rotate
+#                                transforms.ToTensor(),
+#                                transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))
+                                
+#                                ])
 
-# Test Phase transformations
-test_transforms = transforms.Compose([
-                                      #  transforms.Resize((28, 28)),
-                                      #  transforms.ColorJitter(brightness=0.10, contrast=0.1, saturation=0.10, hue=0.1),
-                                       transforms.ToTensor(),
-                                       transforms.Normalize((0.1307,), (0.3081,))
-                                       ])
+# # Test Phase transformations
+# test_transforms = transforms.Compose([
+#                                       #  transforms.Resize((28, 28)),
+#                                       #  transforms.ColorJitter(brightness=0.10, contrast=0.1, saturation=0.10, hue=0.1),
+#                                        transforms.ToTensor(),
+#                                         transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))
+#                                        ])
 
 
-trainset = torchvision.datasets.CIFAR10(root='./data', train=True,
-                                        download=True, transform=train_transforms)
-# dataloader arguments - something you'll fetch these from cmdprmt
-dataloader_args = dict(shuffle=True, batch_size=4, num_workers=2, pin_memory=True) if cuda else dict(shuffle=True, batch_size=2)
+# trainset = torchvision.datasets.CIFAR10(root='./data', train=True,
+#                                         download=True, transform=train_transforms)
+# # dataloader arguments - something you'll fetch these from cmdprmt
+# dataloader_args = dict(shuffle=True, batch_size=4, num_workers=2, pin_memory=True) if cuda else dict(shuffle=True, batch_size=2)
 
-# train dataloader
-trainloader = torch.utils.data.DataLoader(trainset, **dataloader_args)
-testset = torchvision.datasets.CIFAR10(root='./data', train=False,
-                                       download=True, transform=test_transforms)
-# test dataloader
-testloader = torch.utils.data.DataLoader(testset, **dataloader_args)
+# # train dataloader
+# trainloader = torch.utils.data.DataLoader(trainset, **dataloader_args)
+# testset = torchvision.datasets.CIFAR10(root='./data', train=False,
+#                                        download=True, transform=test_transforms)
+# # test dataloader
+# testloader = torch.utils.data.DataLoader(testset, **dataloader_args)
 
-classes = ('plane', 'car', 'bird', 'cat',
-           'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
+# classes = ('plane', 'car', 'bird', 'cat',
+#            'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
 
 use_cuda = torch.cuda.is_available()
 device = torch.device("cuda" if use_cuda else "cpu")
