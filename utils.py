@@ -22,7 +22,9 @@ from torchsummary import summary
 from tqdm import tqdm
 from torch.optim.lr_scheduler import StepLR
 import torch.optim as optim
+from Models import resnet
 
+from Models.resnet import *
 #from Models import resnet
 import matplotlib.pyplot as plt
 import numpy as np
@@ -106,6 +108,13 @@ def im_convert(tensor):
   image = image * np.array((0.5, 0.5, 0.5)) + np.array((0.5, 0.5, 0.5))
   image = image.clip(0, 1)
   return image
+
+
+
+
+use_cuda = torch.cuda.is_available()
+device = torch.device("cuda" if use_cuda else "cpu")
+model =  ResNet18().to(device)
 
 def misclassification():
     use_cuda = torch.cuda.is_available()
