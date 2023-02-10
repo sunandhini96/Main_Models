@@ -7,6 +7,8 @@ Original file is located at
     https://colab.research.google.com/drive/1VsfEFy8zhJT2V8I_ecDEH3iYlk-ugCa0
 """
 
+# Transformations and misclassifications.
+
 import albumentations as A
 import matplotlib.pyplot as plt
 import numpy as np
