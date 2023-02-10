@@ -115,5 +115,6 @@ def misclassification():
 
     for idx in np.arange(20):
       ax = fig.add_subplot(2, 10, idx+1, xticks=[], yticks=[])
-      plt.imshow(im_convert(images[idx]))
-      ax.set_title("{} ({})".format(str(classes[preds[idx].item()]), str(classes[labels[idx].item()])), color=("green" if preds[idx]==labels[idx] else "red"))
+      if(preds[idx]==labels[idx]):
+           plt.imshow(im_convert(images[idx]))
+           ax.set_title("{} ({})".format(str(classes[preds[idx].item()]), str(classes[labels[idx].item()])), color=("green" if preds[idx]==labels[idx]))
