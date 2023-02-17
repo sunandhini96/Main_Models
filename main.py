@@ -37,7 +37,7 @@ Original file is located at
 # Train and Test loop:
 
 
-
+from torchvision import datasets, transforms
 import torch
 import torchvision
 import torchvision.transforms as transforms
