@@ -218,7 +218,7 @@ class AlbumentationImageDataset(Dataset):
         image = self.norm(image=np.array(image))['image']
       image = np.transpose(image, (2, 0, 1)).astype(np.float32)
       return torch.tensor(image, dtype=torch.float), label
-pip install torch_lr_finder
+
 from torch_lr_finder import LRFinder
 
 
