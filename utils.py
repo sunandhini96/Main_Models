@@ -14,7 +14,7 @@ import numpy as np
 
 import albumentations as A
 from albumentations.pytorch import ToTensorV2
-
+from torchvision import datasets, transforms
 import torch
 import torch.optim as optim
 from torchsummary import summary
