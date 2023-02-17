@@ -73,6 +73,7 @@ test_losses = []
 train_acc = []
 test_acc = []
 
+criterion = nn.CrossEntropyLoss()
 def train(model, device, train_loader, optimizer, epoch):
   model.train()
   pbar = tqdm(train_loader)
