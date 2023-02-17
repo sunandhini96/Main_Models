@@ -55,6 +55,8 @@ from Models import resnet
 from Models.resnet import *
 # loading the dataset
 
+exp = datasets.CIFAR10('./data', train=True, download=True)
+exp_data = exp.data
 
 use_cuda = torch.cuda.is_available()
 device = torch.device("cuda" if use_cuda else "cpu")
