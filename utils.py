@@ -146,7 +146,8 @@ def misclassification():
       ax = fig.add_subplot(6, 10, idx+1, xticks=[], yticks=[])
       plt.imshow(im_convert(images[idx]))#gt ground truth
       ax.set_title(" pred {} gt ({})".format(str(classes[preds[idx].item()]), str(classes[labels[idx].item()])), color=("green" if preds[idx]==labels[idx] else "red"))
-    
+exp = datasets.CIFAR10('./data', train=True, download=True)
+exp_data = exp.data   
 def viz_data(cols=8, rows=5):
   figure = plt.figure(figsize=(14, 10))
   for i in range(1, cols * rows + 1):
