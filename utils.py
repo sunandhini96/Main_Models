@@ -146,7 +146,7 @@ def viz_data(cols=8, rows=5):
   plt.tight_layout()
   plt.show()
     
-  def show_images(aug_dict, ncol=6):
+def show_images(aug_dict, ncol=6):
   nrow = len(aug_dict)
 
   fig, axes = plt.subplots(ncol, nrow, figsize=( 3*nrow, 15), squeeze=False)
