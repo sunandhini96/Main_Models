@@ -52,7 +52,7 @@ print("CUDA Available?", cuda)
 num_workers=0
 # For reproducibility
 torch.manual_seed(SEED)
-
+criterion = nn.CrossEntropyLoss()
 if cuda:
     torch.cuda.manual_seed(SEED)
 
