@@ -229,6 +229,7 @@ def fit_model(net, optimizer, criterion, device, NUM_EPOCHS,train_loader, test_l
         return net, (training_acc, training_loss, testing_acc, testing_loss, lr_trend)
     else:
         return net, (training_acc, training_loss, testing_acc, testing_loss)
+    
 
     
   
