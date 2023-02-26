@@ -7,34 +7,10 @@ Original file is located at
     https://colab.research.google.com/drive/1wXxQswUxSlqyZNft-zL2vJfWNQkvFtoR
 """
 
-# Commented out IPython magic to ensure Python compatibility.
-# %matplotlib inline
-
-# from google.colab import drive
-# drive.mount('/content/drive')
-
-# Commented out IPython magic to ensure Python compatibility.
-# %cd /content/drive/MyDrive/Github/
-
-# !git init School_of_AI
-
-# Commented out IPython magic to ensure Python compatibility.
-# %cd School_of_AI/
-
-# !git status
-
-# !git add .
-
-# !git clone https://github.com/sunandhini96/Main_Models.git
-
-# Commented out IPython magic to ensure Python compatibility.
-# %cd Main_Models/
-
-# Commented out IPython magic to ensure Python compatibility.
-# %ls -a
 
 
-# Train and Test loop:
+
+# Train and Test loop and fit_model and save_model:
 
 
 from torchvision import datasets, transforms
