@@ -73,4 +73,4 @@ class TransformerBlock(nn.Module):
         fc = self.fc(U4)
 
         
-        return X
+        return fc
