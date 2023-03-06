@@ -157,7 +157,7 @@ class ViT(nn.Module):
         image_height, image_width = pair(image_size)
         reduced_size = image_size // patch_size
         shape = (reduced_size, reduced_size)
-        
+        self.dim=dim
         patch_height, patch_width = pair(patch_size)
 
         assert image_height % patch_height == 0 and image_width % patch_width == 0, 'Image dimensions must be divisible by the patch size.'
@@ -205,7 +205,7 @@ class ViT(nn.Module):
         #print("after patch embedding",x.shape)
         b, n, d = x.shape
         batch_size=x.shape[0]
-        self.cls_token = nn.Parameter(torch.randn(b,1, dim),requires_grad=True).cuda()
+        self.cls_token = nn.Parameter(torch.randn(b,1, self.dim),requires_grad=True).cuda()
         #cls_tokens = repeat(self.cls_token, '() n d -> b n d', b = batch_size)
         # 7. Prepend class token embedding to patch embedding
         #print("class token",self.cls_token.shape)
