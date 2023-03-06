@@ -89,7 +89,7 @@ class Attention(nn.Module):
         queries = self.to_queries(x).view(b, self.heads, self.dim_head, -1)
         q,k,v = queries,keys,values
         dots = torch.matmul(k.transpose(-2, -1),q) * self.scale
-        print("dots",dots.shape)
+        #print("dots",dots.shape)
         # indices = self.relative_indices.expand(self.heads, -1)
         # print("indices",indices.shape)
         # rel_pos_enc = self.pos_enc.gather(-1, indices)
