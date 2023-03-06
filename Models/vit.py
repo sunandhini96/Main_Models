@@ -57,6 +57,7 @@ class Attention(nn.Module):
         project_out = not (heads == 1 and dim_head == dim)
         self.shape=shape
         self.heads = heads
+        self.dim=dim
         self.dim_head = dim_head
         self.scale = dim_head ** -0.5
        
@@ -136,6 +137,7 @@ class Transformer(nn.Module):
     def __init__(self, dim, depth, heads, dim_head, mlp_dim,shape, dropout = 0.):
         super().__init__()
         self.layers = nn.ModuleList([])
+        self.dim=dim
         #self.multiheadattention = MultiheadAttentionConv2d(embed_dim=dim,num_heads=heads, dropout=dropout)
         for _ in range(depth):
             self.layers.append(nn.ModuleList([
