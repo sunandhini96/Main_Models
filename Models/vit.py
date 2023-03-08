@@ -160,7 +160,7 @@ class ViT(nn.Module):
         
        # step 2: create the position embedding : 256 (number of patches) + 1 (class_token)
         
-        self.pos_embedding = nn.Parameter(torch.randn(1,num_patches + 1, dim),requires_grad=True)
+        self.pos_embedding = nn.Parameter(torch.randn(1,num_patches + 1, dim),requires_grad=True).cuda()
  
         self.dropout = nn.Dropout(emb_dropout)
 
@@ -189,7 +189,7 @@ class ViT(nn.Module):
         batch_size=x.shape[0]
 
         # Create the class token embedding as a learnable parameter that shares the same size as the embedding dimension (D)
-        self.cls_token = nn.Parameter(torch.randn(b,1, self.dim),requires_grad=True)
+        self.cls_token = nn.Parameter(torch.randn(b,1, self.dim),requires_grad=True).cuda()
 
         #  Prepend class token embedding to patch embedding
 
