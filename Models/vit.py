@@ -121,7 +121,7 @@ class Transformer(nn.Module):
         #self.multiheadattention = MultiheadAttentionConv2d(embed_dim=dim,num_heads=heads, dropout=dropout)
         for _ in range(depth):
             self.layers.append(nn.ModuleList([
-                PreNorm(dim,Attention(dim=32,shape=(16,16),in_channels=32,out_channels=32, heads = 4, dim_head = 8, dropout = 0.)),#, in_channels=dim,out_channels=dim,heads = heads, dim_head = dim_head, dropout = dropout
+                PreNorm(dim,Attention(dim=32,shape=(16,16), heads = 4, dim_head = 8, dropout = 0.)),#, in_channels=dim,out_channels=dim,heads = heads, dim_head = dim_head, dropout = dropout
                 PreNorm(dim, FeedForward(dim, mlp_dim, dropout = dropout))
             ]))
     def forward(self, x):
