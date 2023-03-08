@@ -165,17 +165,17 @@ class ViT(nn.Module):
         self.dropout = nn.Dropout(emb_dropout)
 
         # step 3: create the transformer block
-        self.transformer = Transformer(dim, depth, heads, dim_head, mlp_dim, shape, dropout)
+        self.transformer = Transformer(self.dim, depth, heads, dim_head, mlp_dim, shape, dropout)
 
         self.pool = pool
         self.to_latent = nn.Identity()
         # step 4: create the mlp_head
         self.mlp_head = nn.Sequential(
-            nn.LayerNorm(dim),
-            nn.Linear(dim, dim))
+            nn.LayerNorm(self.dim),
+            nn.Linear(self.dim, self.dim))
         # step 5: create the classifier to get output classes
         self.classifier = nn.Sequential(
-            nn.LayerNorm(normalized_shape=dim),
+            nn.LayerNorm(normalized_shape=self.dim),
             nn.Linear(in_features=dim, 
                       out_features=num_classes,bias=True))
         
@@ -189,7 +189,7 @@ class ViT(nn.Module):
         batch_size=x.shape[0]
 
         # Create the class token embedding as a learnable parameter that shares the same size as the embedding dimension (D)
-        self.cls_token = nn.Parameter(torch.randn(b,1, dim),requires_grad=True)
+        self.cls_token = nn.Parameter(torch.randn(b,1, self.dim),requires_grad=True)
 
         #  Prepend class token embedding to patch embedding
 
